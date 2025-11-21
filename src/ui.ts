@@ -1,5 +1,6 @@
 import ApiService from "./services/apiService.js";
 import Product from "./models/Product.js";
+import Cart from "./models/Cart.js";
 import { calculateDiscount } from "./utils/discountCalculator.js";
 import { calculateTax } from "./utils/taxCalculator.js";
 import { logError } from "./utils/errorHandler.js";
@@ -12,25 +13,32 @@ class ProductUI {
   private loadMoreBtn: HTMLButtonElement;
   private loading: HTMLElement;
   private errorDiv: HTMLElement;
+  private modal: HTMLElement;
+  private modalOverlay: HTMLElement;
+  private closeModalBtn: HTMLElement;
+  private addToCartBtn: HTMLButtonElement;
+  private buyNowBtn: HTMLButtonElement;
+  private cart: Cart;
   private currentSkip: number = 0;
   private readonly limit: number = 12;
   private currentCategory: string = "";
   private currentSearch: string = "";
+  private selectedProduct: Product | null = null;
 
   constructor() {
     this.productsGrid = document.getElementById("productsGrid") as HTMLElement;
-    this.searchInput = document.getElementById(
-      "searchInput"
-    ) as HTMLInputElement;
+    this.searchInput = document.getElementById("searchInput") as HTMLInputElement;
     this.searchBtn = document.getElementById("searchBtn") as HTMLButtonElement;
-    this.categoryFilter = document.getElementById(
-      "categoryFilter"
-    ) as HTMLSelectElement;
-    this.loadMoreBtn = document.getElementById(
-      "loadMoreBtn"
-    ) as HTMLButtonElement;
+    this.categoryFilter = document.getElementById("categoryFilter") as HTMLSelectElement;
+    this.loadMoreBtn = document.getElementById("loadMoreBtn") as HTMLButtonElement;
     this.loading = document.getElementById("loading") as HTMLElement;
     this.errorDiv = document.getElementById("error") as HTMLElement;
+    this.modal = document.getElementById("productModal") as HTMLElement;
+    this.modalOverlay = this.modal.querySelector(".modal__overlay") as HTMLElement;
+    this.closeModalBtn = document.getElementById("closeModal") as HTMLElement;
+    this.addToCartBtn = document.getElementById("addToCartBtn") as HTMLButtonElement;
+    this.buyNowBtn = document.getElementById("buyNowBtn") as HTMLButtonElement;
+    this.cart = new Cart();
 
     this.initializeEventListeners();
     this.loadCategories();
@@ -47,10 +55,21 @@ class ProductUI {
         this.handleSearch();
       }
     });
-    this.categoryFilter.addEventListener("change", () =>
-      this.handleCategoryFilter()
-    );
+    this.categoryFilter.addEventListener("change", () => this.handleCategoryFilter());
     this.loadMoreBtn.addEventListener("click", () => this.handleLoadMore());
+    
+    // Modal event listeners
+    this.closeModalBtn.addEventListener("click", () => this.closeModal());
+    this.modalOverlay.addEventListener("click", () => this.closeModal());
+    this.addToCartBtn.addEventListener("click", () => this.handleAddToCart());
+    this.buyNowBtn.addEventListener("click", () => this.handleBuyNow());
+    
+    // ESC key to close modal
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && this.modal.classList.contains("active")) {
+        this.closeModal();
+      }
+    });
   }
 
   /**

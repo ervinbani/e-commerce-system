@@ -393,3 +393,372 @@ body {
     font-size: 0.875rem;
   }
 }
+
+// Modal
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+
+  &.active {
+    display: block;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 1rem;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease;
+
+    @media (max-width: $tablet) {
+      width: 95%;
+      max-height: 95vh;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border: none;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    @include flex-center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $error-color;
+      color: white;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__body {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+  }
+
+  &__gallery {
+    flex: 1;
+    max-width: 400px;
+
+    @media (max-width: $tablet) {
+      max-width: 100%;
+    }
+  }
+
+  &__main-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: $bg-light;
+    margin-bottom: 1rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: $tablet) {
+      height: 300px;
+    }
+  }
+
+  &__thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__thumbnail {
+    width: 70px;
+    height: 70px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &.active {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__category {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: $primary-color;
+    background-color: #dbeafe;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    text-transform: capitalize;
+    width: fit-content;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+
+    @media (max-width: $tablet) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__rating-stars {
+    color: $warning-color;
+    font-size: 1.125rem;
+  }
+
+  &__rating-count {
+    color: $text-light;
+    font-size: 0.875rem;
+  }
+
+  &__brand {
+    font-size: 1rem;
+    color: $text-light;
+  }
+
+  &__description {
+    color: $text-dark;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  &__price-section {
+    background-color: $bg-light;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  &__price-main {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__final-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $primary-color;
+  }
+
+  &__original-price {
+    font-size: 1.25rem;
+    color: $text-light;
+    text-decoration: line-through;
+  }
+
+  &__discount-badge {
+    display: inline-block;
+    background-color: #dcfce7;
+    color: $secondary-color;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__price-breakdown {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid $border-color;
+
+    h4 {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      color: $text-dark;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: $text-dark;
+
+      &.discount-row {
+        color: $secondary-color;
+      }
+
+      &.total-row {
+        border-top: 2px solid $border-color;
+        margin-top: 0.5rem;
+        padding-top: 0.75rem;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  &__stock {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+
+    &.in-stock {
+      background-color: #dcfce7;
+      color: $secondary-color;
+    }
+
+    &.low-stock {
+      background-color: #fef3c7;
+      color: $warning-color;
+    }
+
+    &.out-of-stock {
+      background-color: #fee2e2;
+      color: $error-color;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &__btn {
+    @include button-base;
+    flex: 1;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &--cart {
+      background-color: white;
+      color: $primary-color;
+      border: 2px solid $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+
+    &--buy {
+      background-color: $primary-color;
+      color: white;
+
+      &:hover {
+        background-color: $primary-dark;
+      }
+    }
+  }
+
+  &__info {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $border-color;
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: $text-dark;
+
+      strong {
+        color: $text-light;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, -45%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+// Prevent body scroll when modal is open
+body.modal-open {
+  overflow: hidden;
+}
