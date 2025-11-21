@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce System</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="header__title">E-Commerce System</h1>
+        <p class="header__subtitle">Browse our product catalog</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <!-- Search and Filter Section -->
+        <section class="controls">
+          <div class="search">
+            <input
+              type="text"
+              id="searchInput"
+              class="search__input"
+              placeholder="Search products..."
+            />
+            <button id="searchBtn" class="search__btn">Search</button>
+          </div>
+
+          <div class="filters">
+            <label for="categoryFilter" class="filters__label"
+              >Filter by Category:</label
+            >
+            <select id="categoryFilter" class="filters__select">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading">
+          <div class="loading__spinner"></div>
+          <p>Loading products...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error" class="error" style="display: none">
+          <p class="error__message"></p>
+        </div>
+
+        <!-- Products Grid -->
+        <section id="productsGrid" class="products-grid"></section>
+
+        <!-- Load More Button -->
+        <div class="load-more">
+          <button id="loadMoreBtn" class="load-more__btn">Load More</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 E-Commerce System. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="dist/ui.js"></script>
+  </body>
+</html>
