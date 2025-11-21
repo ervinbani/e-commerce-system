@@ -1,18 +1,15 @@
 export default class ApiService {
-  private baseUrl: string;
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
+  private static baseUrl: string = "https://dummyjson.com";
 
-  async getData(endpoint: string): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${endpoint}`);
+  static async getData(endpoint: string): Promise<any> {
+    const response = await fetch(`${ApiService.baseUrl}/${endpoint}`);
     if (!response.ok) {
       throw new Error(`Error fetching data from ${endpoint}`);
     }
     return response.json();
   }
-  async postData(endpoint: string, data: any): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  static async postData(endpoint: string, data: any): Promise<any> {
+    const response = await fetch(`${ApiService.baseUrl}/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,8 +21,8 @@ export default class ApiService {
     }
     return response.json();
   }
-  async putData(endpoint: string, data: any): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  static async putData(endpoint: string, data: any): Promise<any> {
+    const response = await fetch(`${ApiService.baseUrl}/${endpoint}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -37,8 +34,8 @@ export default class ApiService {
     }
     return response.json();
   }
-  async deleteData(endpoint: string): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${endpoint}`, {
+  static async deleteData(endpoint: string): Promise<any> {
+    const response = await fetch(`${ApiService.baseUrl}/${endpoint}`, {
       method: "DELETE",
     });
     if (!response.ok) {
@@ -53,7 +50,7 @@ fetch('https://dummyjson.com/products/search?q=phone')
 .then(console.log);
 */
 
-  async searchProducts(query: string): Promise<any> {
+  static async searchProducts(query: string): Promise<any> {
     const response = await fetch(
       `https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`
     );
