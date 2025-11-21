@@ -59,6 +59,116 @@
       </div>
     </main>
 
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__content">
+        <button class="modal__close" id="closeModal">&times;</button>
+
+        <div class="modal__body">
+          <!-- Image Gallery -->
+          <div class="modal__gallery">
+            <div class="modal__main-image">
+              <img id="modalMainImage" src="" alt="Product" />
+            </div>
+            <div class="modal__thumbnails" id="modalThumbnails">
+              <!-- Thumbnails will be inserted here -->
+            </div>
+          </div>
+
+          <!-- Product Details -->
+          <div class="modal__details">
+            <span class="modal__category" id="modalCategory"></span>
+            <h2 class="modal__title" id="modalTitle"></h2>
+
+            <div class="modal__rating">
+              <span class="modal__rating-stars" id="modalRating"></span>
+              <span class="modal__rating-count" id="modalRatingCount"></span>
+            </div>
+
+            <div class="modal__brand">
+              <strong>Brand:</strong> <span id="modalBrand"></span>
+            </div>
+
+            <p class="modal__description" id="modalDescription"></p>
+
+            <!-- Price Breakdown -->
+            <div class="modal__price-section">
+              <div class="modal__price-main">
+                <span class="modal__final-price" id="modalFinalPrice"></span>
+                <span
+                  class="modal__original-price"
+                  id="modalOriginalPrice"
+                ></span>
+              </div>
+
+              <div class="modal__discount-badge" id="modalDiscountBadge"></div>
+
+              <div class="modal__price-breakdown">
+                <h4>Price Breakdown:</h4>
+                <div class="price-row">
+                  <span>Original Price:</span>
+                  <span id="modalPriceOriginal"></span>
+                </div>
+                <div class="price-row discount-row">
+                  <span
+                    >Discount (<span id="modalDiscountPercent"></span>):</span
+                  >
+                  <span id="modalDiscountAmount"></span>
+                </div>
+                <div class="price-row">
+                  <span>Price After Discount:</span>
+                  <span id="modalPriceAfterDiscount"></span>
+                </div>
+                <div class="price-row">
+                  <span>Tax (<span id="modalTaxPercent"></span>):</span>
+                  <span id="modalTaxAmount"></span>
+                </div>
+                <div class="price-row total-row">
+                  <span><strong>Final Price:</strong></span>
+                  <span id="modalPriceTotal"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stock Info -->
+            <div class="modal__stock" id="modalStock"></div>
+
+            <!-- Action Buttons -->
+            <div class="modal__actions">
+              <button class="modal__btn modal__btn--cart" id="addToCartBtn">
+                <span>🛒</span> Add to Cart
+              </button>
+              <button class="modal__btn modal__btn--buy" id="buyNowBtn">
+                Buy Now
+              </button>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="modal__info">
+              <div class="info-item">
+                <strong>SKU:</strong> <span id="modalSku"></span>
+              </div>
+              <div class="info-item">
+                <strong>Availability:</strong>
+                <span id="modalAvailability"></span>
+              </div>
+              <div class="info-item">
+                <strong>Shipping:</strong> <span id="modalShipping"></span>
+              </div>
+              <div class="info-item">
+                <strong>Warranty:</strong> <span id="modalWarranty"></span>
+              </div>
+              <div class="info-item">
+                <strong>Return Policy:</strong>
+                <span id="modalReturnPolicy"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="container">
         <p>&copy; 2025 E-Commerce System. All rights reserved.</p>
