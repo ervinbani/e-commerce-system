@@ -84,6 +84,7 @@ async function main() {
     }
   }
 }
-
-// Run the application
-main();
+// dom loading
+document.addEventListener("DOMContentLoaded", () => {
+  main();
+});
