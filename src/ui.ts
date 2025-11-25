@@ -194,7 +194,7 @@ class ProductUI {
       <p class="product-card__description">${product.description}</p>
       
       <div class="product-card__details">
-        <span class="product-card__brand">${product.brand}</span>
+        <span class="product-card__brand">${product.brand || "No Brand"}</span>
         <span class="product-card__rating">⭐ ${product.rating}</span>
       </div>
       

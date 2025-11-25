@@ -34,7 +34,7 @@ export default class Product implements IProduct {
     this.discountPercentage = data.discountPercentage;
     this.rating = data.rating;
     this.stock = data.stock;
-    this.brand = data.brand;
+    this.brand = data.brand || "No Brand";
     this.thumbnail = data.thumbnail;
     this.images = data.images;
   }
